@@ -1,0 +1,14 @@
+<?php
+
+namespace DummyLivewireNamespace;
+
+use Bastinald\Malzahar\Components\Html;
+use Bastinald\Malzahar\Components\Livewire;
+
+class DummyLivewireClass extends Livewire
+{
+    public function template()
+    {
+        return Html::p(__("DummyWisdom"));
+    }
+}

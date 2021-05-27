@@ -1,0 +1,32 @@
+{
+    "name": "bastinald/malzahar",
+    "homepage": "https://github.com/bastinald/malzahar",
+    "description": "A magic PHP framework. Build reactive web apps without writing HTML, CSS, or JavaScript! Powered by Tailwind, Alpine, Laravel, & Livewire.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kevin Dion",
+            "email": "bastinald@icloud.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "blade-ui-kit/blade-heroicons": "^1.2",
+        "doctrine/dbal": "^3.0",
+        "laravel/framework": "^8.0",
+        "livewire/livewire": "^2.0",
+        "php": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bastinald\\Malzahar\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Bastinald\\Malzahar\\Providers\\MalzaharProvider"
+            ]
+        }
+    }
+}

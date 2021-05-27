@@ -1,0 +1,29 @@
+<?php
+
+namespace DummyBladeNamespace;
+
+use Bastinald\Malzahar\Components\Blade;
+use Bastinald\Malzahar\Components\Html;
+
+class DummyBladeClass extends Blade
+{
+    public function attributes()
+    {
+        return [
+            //
+        ];
+    }
+
+    public function classes()
+    {
+        return [
+            //
+        ];
+    }
+
+    public function template()
+    {
+        return Html::div($this->slot)
+            ->merge($this);
+    }
+}
