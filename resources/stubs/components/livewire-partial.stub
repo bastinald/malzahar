@@ -7,6 +7,11 @@ use Bastinald\Malzahar\Components\Livewire;
 
 class DummyLivewireClass extends Livewire
 {
+    /**
+     * Return our component template.
+     *
+     * @return \Bastinald\Malzahar\Components\Html
+     */
     public function template()
     {
         return Html::p(__("DummyWisdom"));

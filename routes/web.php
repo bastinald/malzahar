@@ -5,6 +5,9 @@ use Illuminate\Support\Str;
 use Livewire\Commands\ComponentParser;
 use Symfony\Component\Finder\Finder;
 
+/**
+ * Auto generate routes from component classes.
+ */
 Route::middleware('web')->group(function () {
     $path = ComponentParser::generatePathFromNamespace(config('livewire.class_namespace'));
     $namespace = app()->getNamespace();

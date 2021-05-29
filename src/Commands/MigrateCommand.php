@@ -2,19 +2,29 @@
 
 namespace Bastinald\Malzahar\Commands;
 
+use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Doctrine\DBAL\Schema\Comparator;
+use Symfony\Component\Finder\Finder;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Str;
-use Symfony\Component\Finder\Finder;
 
 class MigrateCommand extends Command
 {
+    /**
+     * Command signature.
+     * 
+     * @var string
+     */
     protected $signature = 'malz:migrate {--f} {--s} {--fs}';
 
-    public function handle()
+    /**
+     * Execute the given command.
+     * 
+     * @return int
+     */
+    public function handle(): int
     {
         $this->handleTraditionalMigrations();
         $this->handleAutomaticMigrations();
@@ -22,9 +32,16 @@ class MigrateCommand extends Command
         if ($this->option('s') || $this->option('fs')) {
             $this->seed();
         }
+
+        return 0;
     }
 
-    public function handleTraditionalMigrations()
+    /**
+     * Run any traditional Laravel migrations.
+     * 
+     * @return void
+     */
+    public function handleTraditionalMigrations(): void
     {
         $command = 'migrate';
 
@@ -35,7 +52,12 @@ class MigrateCommand extends Command
         Artisan::call($command . ' --force');
     }
 
-    public function handleAutomaticMigrations()
+    /**
+     * Parse through existing models and run auto-migrations.
+     * 
+     * @return void
+     */
+    public function handleAutomaticMigrations(): void
     {
         $path = is_dir(app_path('Models')) ? app_path('Models') : app_path();
         $namespace = app()->getNamespace();
@@ -55,7 +77,13 @@ class MigrateCommand extends Command
         $this->info('Migration complete!');
     }
 
-    public function migrate($model)
+    /**
+     * Run auto-migration from model class.
+     * 
+     * @param  string $model
+     * @return void
+     */
+    public function migrate(string $model): void
     {
         $model = app($model);
         $modelTable = $model->getTable();
@@ -85,7 +113,12 @@ class MigrateCommand extends Command
         }
     }
 
-    public function seed()
+    /**
+     * Seed the database from existing seeder files.
+     * 
+     * @return void
+     */
+    public function seed(): void
     {
         $command = 'db:seed --force';
 

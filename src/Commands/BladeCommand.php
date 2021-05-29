@@ -2,17 +2,27 @@
 
 namespace Bastinald\Malzahar\Commands;
 
-use Bastinald\Malzahar\Traits\MakesStubs;
 use Illuminate\Console\Command;
 use Livewire\Commands\ComponentParser;
+use Bastinald\Malzahar\Traits\MakesStubs;
 
 class BladeCommand extends Command
 {
     use MakesStubs;
 
+    /**
+     * Command signature.
+     * 
+     * @var string
+     */
     protected $signature = 'malz:blade {class}';
 
-    public function handle()
+    /**
+     * Execute the given command.
+     *  
+     * @return int
+     */
+    public function handle(): int
     {
         $componentParser = new ComponentParser(
             'App\\Components\\Blade',
@@ -32,5 +42,7 @@ class BladeCommand extends Command
         );
 
         $this->info('Blade component created!');
+
+        return 0;
     }
 }

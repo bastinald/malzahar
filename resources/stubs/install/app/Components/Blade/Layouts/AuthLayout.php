@@ -8,7 +8,12 @@ use Bastinald\Malzahar\Components\Html;
 
 class AuthLayout extends Blade
 {
-    public function template()
+    /**
+     * Return our auth layout template.
+     *
+     * @return \Bastinald\Malzahar\Components\Html
+     */
+    public function template(): Html
     {
         return Html::div(
             Html::header(

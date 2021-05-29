@@ -2,19 +2,29 @@
 
 namespace Bastinald\Malzahar\Commands;
 
-use Bastinald\Malzahar\Traits\MakesStubs;
+use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Str;
 use Livewire\Commands\ComponentParser;
+use Bastinald\Malzahar\Traits\MakesStubs;
 
 class ModelCommand extends Command
 {
     use MakesStubs;
 
+    /**
+     * Command signature.
+     * 
+     * @var string
+     */
     protected $signature = 'malz:model {class}';
 
-    public function handle()
+    /**
+     * Execute the given command.
+     * 
+     * @return int
+     */
+    public function handle(): int
     {
         $modelParser = new ComponentParser(
             'App\\Models',
@@ -56,5 +66,7 @@ class ModelCommand extends Command
         );
 
         $this->info('Model & factory created!');
+
+        return 0;
     }
 }

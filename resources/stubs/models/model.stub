@@ -2,17 +2,23 @@
 
 namespace DummyModelNamespace;
 
-use Bastinald\Malzahar\Traits\HasFillable;
 use Faker\Generator;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
+use Bastinald\Malzahar\Traits\HasFillable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DummyModelClass extends Model
 {
     use HasFactory, HasFillable;
 
-    public function migration(Blueprint $table)
+    /**
+     * Table migration for model.
+     *
+     * @param \Illuminate\Database\Schema\Blueprint $table
+     * @return void
+     */
+    public function migration(Blueprint $table): void
     {
         $table->id();
         $table->string('name');
@@ -20,7 +26,13 @@ class DummyModelClass extends Model
         $table->timestamp('updated_at')->nullable();
     }
 
-    public function definition(Generator $faker)
+    /**
+     * Factory definitions.
+     *
+     * @param  \Faker\Generator $faker
+     * @return array
+     */
+    public function definition(Generator $faker): array
     {
         return [
             'name' => $faker->name,

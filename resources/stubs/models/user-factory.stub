@@ -7,13 +7,26 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class UserFactory extends Factory
 {
+    /**
+     * Model class property.
+     * 
+     * @var string
+     */
     protected $model = User::class;
 
-    public function definition()
+    /**
+     * User model definitions.
+     *
+     * @return array
+     */
+    public function definition(): array
     {
         return app($this->model)->definition($this->faker);
     }
 
+    /** 
+     * Set email verified at column to null.
+     */
     public function unverified()
     {
         return $this->state(function (array $attributes) {

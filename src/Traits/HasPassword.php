@@ -7,7 +7,12 @@ use Illuminate\Support\Str;
 
 trait HasPassword
 {
-    protected static function bootHasPassword()
+    /**
+     * Gnerate a password if required.
+     *
+     * @return void
+     */
+    protected static function bootHasPassword(): void
     {
         static::saving(function ($model) {
             if ($model->password &&

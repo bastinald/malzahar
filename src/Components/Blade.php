@@ -8,9 +8,20 @@ class Blade
 {
     use AttributesAndClasses;
 
-    public $slot;
+    /**
+     * Local slot array property.
+     *
+     * @var string
+     */
+    public string $slot;
 
-    public static function make(...$slot)
+    /**
+     * Generate and return a slotted instance.
+     * 
+     * @param  mixed $slot
+     * @return \Bastinald\Malzahar\Components\Blade
+     */
+    public static function make(...$slot): Blade
     {
         $blade = new static;
         $blade->slot = implode($slot);
@@ -18,7 +29,14 @@ class Blade
         return $blade;
     }
 
-    public function __call($attribute, $value)
+    /**
+     * Magic call method to set or fetch attributes.
+     * 
+     * @param  string $attribute
+     * @param  array $value
+     * @return mixed 
+     */
+    public function __call(string $attribute, array $value): mixed
     {
         if (property_exists($this, $attribute)) {
             $this->$attribute = $value[0] ?? null;
@@ -29,7 +47,12 @@ class Blade
         return $this->attribute($attribute, $value);
     }
 
-    public function __toString()
+    /**
+     * Return a string instance of the template.
+     * 
+     * @return string
+     */
+    public function __toString(): string
     {
         return (string)$this->template();
     }

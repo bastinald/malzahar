@@ -2,20 +2,32 @@
 
 namespace App\Components\Livewire\Auth;
 
-use Bastinald\Malzahar\Components\Livewire;
+use Livewire\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Routing\Route as Router;
+use Bastinald\Malzahar\Components\Livewire;
 
 class Logout extends Livewire
 {
-    public function route()
+    /**
+     * Set the logout route.
+     *
+     * @return \Illuminate\Routing\Route|null
+     */
+    public function route(): ?Router
     {
         return Route::get('/logout', static::class)
             ->name('logout')
             ->middleware('auth');
     }
 
-    public function mount()
+    /**
+     * Logout the user and redirect.
+     *
+     * @return \Livewire\Redirector
+     */
+    public function mount(): Redirector
     {
         Auth::logout();
 
