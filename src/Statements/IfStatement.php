@@ -11,15 +11,15 @@ class IfStatement
      *
      * @var array
      */
-    public $conditions = [];
+    public array $conditions = [];
 
     /**
      * Create a new instance of the class.
      *
-     * @param string|null $condition
-     * @param mixed ...$slot
+     * @param bool|null $condition
+     * @param \Bastinald\Malzahar\Contracts\ComponentInterface ...$slot
      */
-    public function __construct(bool $condition, ComponentInterface ...$slot)
+    public function __construct(?bool $condition, ComponentInterface ...$slot)
     {
         $this->conditions[$condition] = implode($slot);
     }
@@ -27,11 +27,11 @@ class IfStatement
     /**
      * Else if condition handler.
      *
-     * @param  string $condition
-     * @param  array ...$slot
+     * @param  bool|null $condition
+     * @param  \Bastinald\Malzahar\Contracts\ComponentInterface ...$slot
      * @return \Bastinald\Malzahar\Statements\IfStatement
      */
-    public function elseif(bool $condition, ComponentInterface ...$slot): IfStatement
+    public function elseif(?bool $condition, ComponentInterface ...$slot): IfStatement
     {
         $this->conditions[$condition] = implode($slot);
         
