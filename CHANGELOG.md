@@ -1,6 +1,12 @@
 # Release Notes
 
-## Unreleased (5-29-2021)
+## v1.0.6 (5-29-2021)
+
+### Changed
+
+-   refactored `IfStatement` class.
+
+## v1.0.5 (5-29-2021) 849b636
 
 ### Changed
 
