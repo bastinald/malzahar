@@ -2,26 +2,41 @@
 
 namespace DummyBladeNamespace;
 
-use Bastinald\Malzahar\Components\Blade;
 use Bastinald\Malzahar\Components\Html;
+use Bastinald\Malzahar\Components\Blade;
 
 class DummyBladeClass extends Blade
 {
-    public function attributes()
+    /**
+     * Return and array of attributes.
+     *
+     * @return array
+     */
+    public function attributes(): array
     {
         return [
             //
         ];
     }
 
-    public function classes()
+    /**
+     * Return and array of classes.
+     *
+     * @return array
+     */
+    public function classes(): array
     {
         return [
             //
         ];
     }
 
-    public function template()
+    /**
+     * Return our component template.
+     *
+     * @return \Bastinald\Malzahar\Components\Html
+     */
+    public function template(): Html
     {
         return Html::div($this->slot)
             ->merge($this);

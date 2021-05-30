@@ -2,19 +2,29 @@
 
 namespace App\Components\Blade\Nav;
 
-use Bastinald\Malzahar\Components\Blade;
 use Bastinald\Malzahar\Components\Html;
+use Bastinald\Malzahar\Components\Blade;
 
 class NavMenu extends Blade
 {
-    public function classes()
+    /**
+     * Navmenu classes array.
+     *
+     * @return array
+     */
+    public function classes(): array
     {
         return [
             'flex space-x-3',
         ];
     }
 
-    public function template()
+    /**
+     * Return the nav menu component template.
+     *
+     * @return \Bastinald\Malzahar\Components\Html
+     */
+    public function template(): Html
     {
         return Html::nav(
             NavLink::make()->icon('home')->route('home')->title(__('Home')),

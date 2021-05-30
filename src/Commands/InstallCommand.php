@@ -8,9 +8,19 @@ use Illuminate\Support\Facades\Artisan;
 
 class InstallCommand extends Command
 {
+    /**
+     * Command signature.
+     * 
+     * @var string
+     */
     protected $signature = 'malz:install';
 
-    public function handle()
+    /**
+     * Execute the given command.
+     * 
+     * @return int
+     */
+    public function handle(): int
     {
         (new Filesystem)->copyDirectory(
             __DIR__ . '/../../resources/stubs/install',
@@ -23,5 +33,7 @@ class InstallCommand extends Command
         exec('npm run dev');
 
         $this->info('Malzahar installed!');
+
+        return 0;
     }
 }

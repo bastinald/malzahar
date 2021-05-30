@@ -2,17 +2,22 @@
 
 namespace Bastinald\Malzahar\Providers;
 
-use Bastinald\Malzahar\Commands\BladeCommand;
-use Bastinald\Malzahar\Commands\InstallCommand;
-use Bastinald\Malzahar\Commands\LivewireCommand;
-use Bastinald\Malzahar\Commands\MigrateCommand;
-use Bastinald\Malzahar\Commands\ModelCommand;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
+use Bastinald\Malzahar\Commands\BladeCommand;
+use Bastinald\Malzahar\Commands\ModelCommand;
+use Bastinald\Malzahar\Commands\InstallCommand;
+use Bastinald\Malzahar\Commands\MigrateCommand;
+use Bastinald\Malzahar\Commands\LivewireCommand;
 
 class MalzaharProvider extends ServiceProvider
 {
-    public function boot()
+    /**
+     * Boot the service provider.
+     *
+     * @return void
+     */ 
+    public function boot(): void
     {
         Config::set('livewire.class_namespace', 'App\\Components\\Livewire');
         Config::set('livewire.view_path', resource_path('views'));

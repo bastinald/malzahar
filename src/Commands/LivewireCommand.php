@@ -2,18 +2,28 @@
 
 namespace Bastinald\Malzahar\Commands;
 
-use Bastinald\Malzahar\Traits\MakesStubs;
-use Illuminate\Console\Command;
 use Illuminate\Support\Str;
+use Illuminate\Console\Command;
 use Livewire\Commands\ComponentParser;
+use Bastinald\Malzahar\Traits\MakesStubs;
 
 class LivewireCommand extends Command
 {
     use MakesStubs;
 
+    /**
+     * Command signature.
+     * 
+     * @var string
+     */
     protected $signature = 'malz:livewire {class} {--f}';
 
-    public function handle()
+    /**
+     * Execute the given command.
+     * 
+     * @return int
+     */
+    public function handle(): int
     {
         $componentParser = new ComponentParser(
             config('livewire.class_namespace'),
@@ -37,5 +47,7 @@ class LivewireCommand extends Command
         );
 
         $this->info('Livewire component created!');
+
+        return 0;
     }
 }

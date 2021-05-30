@@ -2,15 +2,32 @@
 
 namespace App\Components\Blade\Forms;
 
-use Bastinald\Malzahar\Components\Blade;
 use Bastinald\Malzahar\Components\Html;
+use Bastinald\Malzahar\Components\Blade;
 use Bastinald\Malzahar\Statements\Statement;
 
 class Input extends Blade
 {
-    public $label, $error;
+    /**
+     * Input label property.
+     * 
+     * @var string
+     */
+    public string $label;
+    
+    /**
+     * Input error property.
+     * 
+     * @var string|null
+     */
+    public ?string $error;
 
-    public function attributes()
+    /**
+     * Input attributes array.
+     *
+     * @return array
+     */
+    public function attributes(): array
     {
         return [
             'type' => $type = $this->attributes->get('type', 'text'),
@@ -18,7 +35,12 @@ class Input extends Blade
         ];
     }
 
-    public function classes()
+    /**
+     * Input classes array.
+     *
+     * @return array
+     */
+    public function classes(): array
     {
         return [
             'rounded-md shadow-sm w-full',
@@ -27,7 +49,12 @@ class Input extends Blade
         ];
     }
 
-    public function template()
+    /**
+     * Return our input component template.
+     *
+     * @return \Bastinald\Malzahar\Components\Html
+     */
+    public function template(): Html
     {
         return Html::div(
             Statement::if($this->label,

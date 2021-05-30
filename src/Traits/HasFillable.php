@@ -6,7 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 trait HasFillable
 {
-    public function getFillable()
+    /**
+     * Generate a list of fillable columns.
+     *
+     * @return array
+     */
+    public function getFillable(): array
     {
         return Schema::getColumnListing($this->getTable());
     }

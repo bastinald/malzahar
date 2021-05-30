@@ -6,7 +6,15 @@ use Illuminate\Filesystem\Filesystem;
 
 trait MakesStubs
 {
-    public function makeStub($path, $stub, $replaces)
+    /**
+     * Make and save a stub.
+     *
+     * @param  string $path
+     * @param  string $stub
+     * @param  array $replaces
+     * @return void
+     */
+    public function makeStub(string $path, string $stub, array $replaces): void
     {
         $filesystem = new Filesystem;
         $contents = $filesystem->get(__DIR__ . '/../../resources/stubs/' . $stub);

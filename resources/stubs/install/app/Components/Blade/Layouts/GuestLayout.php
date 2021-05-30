@@ -2,12 +2,17 @@
 
 namespace App\Components\Blade\Layouts;
 
-use Bastinald\Malzahar\Components\Blade;
 use Bastinald\Malzahar\Components\Html;
+use Bastinald\Malzahar\Components\Blade;
 
 class GuestLayout extends Blade
 {
-    public function template()
+    /**
+     * Return our guest layout template.
+     *
+     * @return \Bastinald\Malzahar\Components\Html
+     */
+    public function template(): Html
     {
         return Html::div(
             Html::img()

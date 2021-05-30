@@ -2,17 +2,36 @@
 
 namespace Bastinald\Malzahar\Components;
 
-use Bastinald\Malzahar\Traits\AttributesAndClasses;
 use Illuminate\Support\Str;
 use Livewire\CreateBladeView;
+use Bastinald\Malzahar\Traits\AttributesAndClasses;
 
 class Dynamic
 {
     use AttributesAndClasses;
 
-    public $component, $name;
+    /**
+     * Local component property.
+     * 
+     * @var mixed
+     */
+    public $component;
+    
+    /**
+     * Local name property.
+     * 
+     * @var string|null
+     */
+    public ?string $name;
 
-    public static function __callStatic($attribute, $value)
+    /**
+     * Statically generate a new instance of the class.
+     *
+     * @param  mixed $attribute
+     * @param  array $value
+     * @return \Bastinald\Malzahar\Components\Dynamic
+     */
+    public static function __callStatic(string $attribute, array $value): Dynamic
     {
         $dynamic = new static;
         $dynamic->component = Str::snake($attribute, '-');
@@ -21,12 +40,24 @@ class Dynamic
         return $dynamic;
     }
 
-    public function __call($attribute, $value)
+    /**
+     * Set and return an attribute.
+     *
+     * @param  string $attribute
+     * @param  array $value
+     * @return mixed
+     */
+    public function __call(string $attribute, array $value): mixed
     {
         return $this->attribute($attribute, $value);
     }
 
-    public function __toString()
+    /**
+     * Return a string instance of a blade template.
+     *
+     * @return string
+     */
+    public function __toString(): string
     {
         if ($this->component == 'livewire') {
             $string = '<livewire:' . $this->name . ' ' . $this->attributes . '/>';

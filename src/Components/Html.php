@@ -3,14 +3,34 @@
 namespace Bastinald\Malzahar\Components;
 
 use Bastinald\Malzahar\Traits\AttributesAndClasses;
+use Bastinald\Malzahar\Contracts\ComponentInterface;
 
-class Html
+class Html implements ComponentInterface 
 {
     use AttributesAndClasses;
 
-    public $tag, $slot;
+    /**
+     * local tag property.
+     * 
+     * @var string
+     */
+    public string $tag;
+    
+    /**
+     * Local slot property.
+     * 
+     * @var string
+     */
+    public string $slot;
 
-    public static function __callStatic($attribute, $value)
+    /**
+     * Statically create a new instance of the class.
+     *
+     * @param  string $attribute
+     * @param  array $value
+     * @return \Bastinald\Malzahar\Components\Html
+     */
+    public static function __callStatic(string $attribute, array $value): Html
     {
         $html = new static;
         $html->tag = $attribute;
@@ -19,12 +39,24 @@ class Html
         return $html;
     }
 
-    public function __call($attribute, $value)
+    /**
+     * Set and return an attribute.
+     *
+     * @param  string $attribute
+     * @param  array $value
+     * @return mixed
+     */
+    public function __call(string $attribute, array $value): mixed
     {
         return $this->attribute($attribute, $value);
     }
 
-    public function __toString()
+    /**
+     * Return a string instance of the template.
+     *
+     * @return string
+     */
+    public function __toString(): string
     {
         $string = '<' . $this->tag . ' ' . $this->attributes . '>';
         $string .= $this->slot;
