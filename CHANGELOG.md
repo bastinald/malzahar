@@ -1,6 +1,17 @@
 # Release Notes
 
-## v1.0.6 (5-29-2021)
+## v1.0.7 (5-30-2021) unreleased
+
+### Added
+
+-   added a default malzahar config file
+
+### Changed
+
+-   refactored service provider to add config and stubs publishing and separate methods
+-   updated `MakesStubs` trait to use published stubs first before default
+
+## v1.0.6 (5-29-2021) e043048
 
 ### Changed
 
