@@ -58,14 +58,14 @@ class Input extends Blade
     {
         return Html::div(
             Statement::if($this->label,
-                Html::label($this->label),
+                fn() => Html::label($this->label),
             ),
 
             Html::input()
                 ->merge($this),
 
             Statement::if($this->error,
-                Html::p($this->error)
+                fn() => Html::p($this->error)
                     ->class('text-red-600 text-sm'),
             ),
         )->class('space-y-1 mb-5');

@@ -2,7 +2,7 @@
 
 namespace Bastinald\Malzahar\Statements;
 
-use Bastinald\Malzahar\Contracts\ComponentInterface;
+use Closure;
 
 class IfStatement
 {
@@ -17,23 +17,23 @@ class IfStatement
      * Create a new instance of the class.
      *
      * @param bool|null $condition
-     * @param \Bastinald\Malzahar\Contracts\ComponentInterface ...$slot
+     * @param \Closure $callback
      */
-    public function __construct(?bool $condition, ComponentInterface ...$slot)
+    public function __construct(?bool $condition, Closure $callback)
     {
-        $this->conditions[$condition] = implode($slot);
+        $this->conditions[$condition] = $callback;
     }
 
     /**
      * Else if condition handler.
      *
      * @param  bool|null $condition
-     * @param  \Bastinald\Malzahar\Contracts\ComponentInterface ...$slot
+     * @param  \Closure $callback
      * @return \Bastinald\Malzahar\Statements\IfStatement
      */
-    public function elseif(?bool $condition, ComponentInterface ...$slot): IfStatement
+    public function elseif(?bool $condition, Closure $callback): IfStatement
     {
-        $this->conditions[$condition] = implode($slot);
+        $this->conditions[$condition] = $callback;
         
         return $this;
     }
@@ -41,14 +41,14 @@ class IfStatement
     /**
      * Else conditions handler.
      *
-     * @param  \Bastinald\Malzahar\Contracts\ComponentInterface ...$slot
+     * @param  \Closure $callback
      * @return \Bastinald\Malzahar\Statements\IfStatement
      */
-    public function else(ComponentInterface ...$slot): IfStatement
+    public function else(Closure $callback): IfStatement
     {
         $condition = $this->findOrFail();
         
-        $this->conditions[$condition] = implode($slot);
+        $this->conditions[$condition] = $callback;
 
         return $this;
     }
@@ -60,7 +60,7 @@ class IfStatement
      */
     public function findOrFail(): bool
     {
-        foreach ($this->conditions as $key => $condition) {
+        foreach ($this->conditions as $key => $callback) {
             if ($key) {
                 return false;
             }
@@ -70,15 +70,15 @@ class IfStatement
     }
 
     /**
-     * Return slot as a string.
+     * Loop conditions and execute the callback.
      *
      * @return string
      */
     public function __toString(): string
     {
-        foreach ($this->conditions as $condition => $slot) {
+        foreach ($this->conditions as $condition => $callback) {
             if ($condition) {
-                return $slot;
+                return $callback();
             }
         }
 

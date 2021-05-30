@@ -6,9 +6,9 @@ A magic PHP framework. Build reactive web apps without writing HTML, CSS, or Jav
 
 ### Requirements
 
-- PHP 8
-- Laravel 8
-- NPM
+-   PHP 8
+-   Laravel 8
+-   NPM
 
 ## Installation
 
@@ -192,7 +192,7 @@ Let's say we created this simple partial component:
 class Alert extends Livewire
 {
     public $message;
-    
+
     public function mount($message)
     {
         $this->message = $message;
@@ -203,13 +203,13 @@ class Alert extends Livewire
         return Html::div(
             Html::p(__($this->message))
                 ->class('font-bold mb-4'),
-            
+
             Html::button(__('Change Message'))
                 ->class('bg-blue-600 text-white px-4 py-2')
                 ->wireClick('changeMessage'),
         );
     }
-    
+
     public function changeMessage()
     {
         $this->message = 'I am a changed message.';
@@ -227,7 +227,7 @@ class Home extends Livewire
         return AuthLayout::make(
             Html::h1($this->title())
                 ->class('text-3xl font-bold mb-4'),
-    
+
             Alert::make()->message('Hello, world!'),
         );
     }
@@ -281,7 +281,7 @@ class Login extends Livewire
     public function login()
     {
         $this->validate();
-        
+
         // attempt to log the user in
     }
 ```
@@ -299,12 +299,12 @@ public function template()
 {
     return Html::div(
         Html::h1(__('Hello, world')),
-        
+
         Html::input()
             ->type('email')
             ->placeholder(__('Email'))
             ->wireModelDefer('email'),
-        
+
         Html::p(__('Look ma, no hands!'))
             ->class('text-blue-600 font-bold'),
     );
@@ -313,7 +313,7 @@ public function template()
 
 If you notice, you'll see that the parameters for the constructing method contain the slot (or content) for that HTML element. See how the `div` in the example above contains an `h1`, `input`, and `p` inside of it. Same goes for the `h1` element, it has some translated text inside it.
 
-For chained attribute methods, just specify an HTML element attribute name, and it's value as the parameter. Look at the `Html::input()` example above, we have given it a `type` of `email`, etc. 
+For chained attribute methods, just specify an HTML element attribute name, and it's value as the parameter. Look at the `Html::input()` example above, we have given it a `type` of `email`, etc.
 
 HTML components also support Livewire and Alpine methods as well. In the example above, you can see the use of `wireModelDefer('email')`, which actually translates to `wire:model.defer="email"` in the rendered HTML. This is used to bind the input value to the `$email` property when an action is performed (`defer`).
 
@@ -346,7 +346,7 @@ Sometimes you will need to use third party blade components in your Malzahar app
 For example, let's say I installed the Laravel Honey package. Normally, to include this component inside one of my views, I would use something like this:
 
 ```html
-<x-honey recaptcha/>
+<x-honey recaptcha />
 ```
 
 Now we can't use actual HTML with Malzahar, so what do we do? We use the `Dynamic` class with a magic constructor method:
@@ -403,7 +403,7 @@ Conditional `if` statements with Malzahar are easy:
 
 ```php
 Statement::if($this->label,
-    Html::label($this->label),
+    fn() => Html::label($this->label),
 ),
 ```
 
@@ -415,18 +415,18 @@ public $color = 'blue';
 public function template()
 {
     return Statement::if($this->color == 'red',
-        Html::h1(__('The color is red!'))
+        fn() => Html::h1(__('The color is red!'))
             ->class('text-red-600'),
     )->elseif($this->color == 'blue',
-        Html::h2(__('The color is blue!'))
+        fn() => Html::h2(__('The color is blue!'))
             ->class('text-blue-600'),
     )->else(
-        Html::h3(__('The color is something else!')),
+        fn() => Html::h3(__('The color is something else!')),
     );
 }
 ```
 
-Notice how the first parameter of `if` is the condition, and every parameter after is what will be rendered if the statement passes.
+Notice how the first parameter of `if` is the condition, and every closure after is what will be rendered if the statement passes.
 
 ### Each Statement
 

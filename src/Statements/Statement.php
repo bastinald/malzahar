@@ -12,23 +12,27 @@ class Statement
      * Statically call IfStatement handler.
      *
      * @param  bool|null $condition
-     * @param  \Bastinald\Malzahar\Contracts\ComponentInterface ...$slot
+     * @param  \Closure $callback
      * @return \Bastinald\Malzahar\Statements\IfStatement
      */
-    public static function if(?bool $condition, ComponentInterface ...$slot): IfStatement
+    public static function if(?bool $condition, Closure $callback): IfStatement
     {
-        return new IfStatement($condition, ...$slot);
+        return new IfStatement($condition, $callback);
     }
 
     /**
      * Statically call EachStatement handler.
      *
-     * @param  \Illuminate\Support\Collection $items
+     * @param  \Illuminate\Support\Collection|array $items
      * @param  \Closure $closure
      * @return \Bastinald\Malzahar\Statements\EachStatement
      */
-    public static function each(Collection $items, Closure $closure): EachStatement
+    public static function each($items, Closure $closure): EachStatement
     {
+        if (!$items instanceof Collection) {
+            $items = collect($items);
+        }
+        
         return new EachStatement($items, $closure);
     }
 }
