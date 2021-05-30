@@ -21,7 +21,7 @@ class IfStatement
      */
     public function __construct(?bool $condition, Closure $callback)
     {
-        $this->conditions[$condition] = $callback;
+        $this->conditions[] = [$condition, $callback];
     }
 
     /**
@@ -33,8 +33,8 @@ class IfStatement
      */
     public function elseif(?bool $condition, Closure $callback): IfStatement
     {
-        $this->conditions[$condition] = $callback;
-        
+        $this->conditions[] = [$condition, $callback];
+
         return $this;
     }
 
@@ -46,27 +46,9 @@ class IfStatement
      */
     public function else(Closure $callback): IfStatement
     {
-        $condition = $this->findOrFail();
-        
-        $this->conditions[$condition] = $callback;
+        $this->conditions[] = [true, $callback];
 
         return $this;
-    }
-
-    /**
-     * Determine if the else condition should be set to true or false.
-     *
-     * @return boolean
-     */
-    public function findOrFail(): bool
-    {
-        foreach ($this->conditions as $key => $callback) {
-            if ($key) {
-                return false;
-            }
-        }
-
-        return true;
     }
 
     /**
@@ -76,8 +58,10 @@ class IfStatement
      */
     public function __toString(): string
     {
-        foreach ($this->conditions as $condition => $callback) {
-            if ($condition) {
+        foreach ($this->conditions as $condition) {
+            if ($condition[0]) {
+                $callback = $condition[1];
+                
                 return $callback();
             }
         }
