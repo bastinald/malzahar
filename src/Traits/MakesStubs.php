@@ -17,7 +17,12 @@ trait MakesStubs
     public function makeStub(string $path, string $stub, array $replaces): void
     {
         $filesystem = new Filesystem;
-        $contents = $filesystem->get(__DIR__ . '/../../resources/stubs/' . $stub);
+
+        if (file_exists(base_path('stubs') . '/' . $stub)) {
+            $contents = $filesystem->get(base_path('stubs') . '/' . $stub);
+        } else {
+            $contents = $filesystem->get(__DIR__ . '/../../resources/stubs/' . $stub);
+        }
 
         foreach ($replaces as $search => $replace) {
             $contents = str_replace($search, $replace, $contents);
