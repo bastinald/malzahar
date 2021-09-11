@@ -1,14 +1,6 @@
-# No Longer Maintained
-
-I have stopped using Tailwind and am no longer supporting this package. If you like it, make your own fork.
-
----
-
 # Malzahar
 
 A magic PHP framework. Build reactive web apps without writing HTML, CSS, or JavaScript! Powered by Tailwind, Alpine, Laravel, & Livewire.
-
-<a href="https://www.youtube.com/watch?v=mXDC7T_YBdU"><img src="https://i.postimg.cc/gk6xdRpN/Screen-Shot-2021-05-27-at-3-55-55-AM.png"></a>
 
 ### Requirements
 
